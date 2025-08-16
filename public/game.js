@@ -702,9 +702,13 @@ function gameLoop() {
         }
     }
 
-    // Camera position (center on player, clamped to world boundaries)
-    cameraX = Math.max(0, Math.min(player.x - canvas.width / 2, worldWidth - canvas.width));
-    cameraY = Math.max(0, Math.min(player.y - canvas.height / 2, worldHeight - canvas.height));
+    // Smoothed camera position
+    const cameraInterpolationFactor = 0.1;
+    let targetCameraX = Math.max(0, Math.min(player.x - canvas.width / 2, worldWidth - canvas.width));
+    let targetCameraY = Math.max(0, Math.min(player.y - canvas.height / 2, worldHeight - canvas.height));
+
+    cameraX += (targetCameraX - cameraX) * cameraInterpolationFactor;
+    cameraY += (targetCameraY - cameraY) * cameraInterpolationFactor;
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
