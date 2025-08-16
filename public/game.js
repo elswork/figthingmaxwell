@@ -131,18 +131,19 @@ ws.onmessage = (event) => {
             delete otherPlayers[data.id];
             break;
         case 'update':
-            if (data.id !== playerId) {
-                if (otherPlayers[data.id]) {
-                    // Update all properties of the other player
-                    otherPlayers[data.id] = {
-                        ...otherPlayers[data.id], // Keep existing properties
-                        ...data.player, // Overlay new properties from server
-                        lastX: otherPlayers[data.id].x, // Store current x as lastX for interpolation
-                        lastY: otherPlayers[data.id].y, // Store current y as lastY for interpolation
-                        targetX: data.player.x, // New x is targetX
-                        targetY: data.player.y  // New y is targetY
-                    };
-                }
+            if (data.id === playerId) {
+                player.x = data.player.x;
+                player.y = data.player.y;
+            } else if (otherPlayers[data.id]) {
+                // Update all properties of the other player
+                otherPlayers[data.id] = {
+                    ...otherPlayers[data.id], // Keep existing properties
+                    ...data.player, // Overlay new properties from server
+                    lastX: otherPlayers[data.id].x, // Store current x as lastX for interpolation
+                    lastY: otherPlayers[data.id].y, // Store current y as lastY for interpolation
+                    targetX: data.player.x, // New x is targetX
+                    targetY: data.player.y  // New y is targetY
+                };
             }
             break;
         case 'health-update':
@@ -480,6 +481,7 @@ function drawPlayer() {
     }
 
     ctx.filter = 'none'; // Reset filter after drawing player
+}
 
 function drawOtherPlayers() {
     for (const id in otherPlayers) {
@@ -494,7 +496,6 @@ function drawOtherPlayers() {
             ctx.filter = 'brightness(2) saturate(2) hue-rotate(0deg)'; // Bright red flash
         }
         ctx.filter = 'none'; // Reset filter after drawing other player
-        }
 
         // Draw shield effect
         if (other.isShielded) {
