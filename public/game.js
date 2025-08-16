@@ -680,19 +680,24 @@ function gameLoop() {
     updatePlayerPosition();
 
     // Interpolate other players' positions for smoother movement
-    const interpolationFactor = 0.2; // Adjust as needed for smoothness vs. responsiveness
     for (const id in otherPlayers) {
         const other = otherPlayers[id];
         if (other.x !== other.targetX || other.y !== other.targetY) {
-            other.x += (other.targetX - other.x) * interpolationFactor;
-            other.y += (other.targetY - other.y) * interpolationFactor;
+            const dx = other.targetX - other.x;
+            const dy = other.targetY - other.y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
 
-            // Snap to target if very close to avoid floating point issues
-            if (Math.abs(other.targetX - other.x) < 0.1) {
+            // Move at a constant speed
+            const moveSpeed = speed * 0.8; // A bit slower than the main player for smoother effect
+
+            if (distance < moveSpeed) {
                 other.x = other.targetX;
-            }
-            if (Math.abs(other.targetY - other.y) < 0.1) {
                 other.y = other.targetY;
+            } else {
+                const moveX = (dx / distance) * moveSpeed;
+                const moveY = (dy / distance) * moveSpeed;
+                other.x += moveX;
+                other.y += moveY;
             }
         }
     }
