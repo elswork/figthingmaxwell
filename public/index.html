@@ -1,0 +1,32 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meme Battle Royale</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Meme Battle Royale</h1>
+    <button id="fullscreen-btn">Pantalla Completa</button>
+    <div id="name-input-container">
+        <input type="text" id="playerNameInput" placeholder="Enter your name" maxlength="12">
+        <button id="joinGameBtn">Join Game</button>
+        <div id="music-controls" style="display:none;">
+            <button id="pauseMusicBtn">Pause Music</button>
+            <button id="resumeMusicBtn">Resume Music</button>
+            <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="0.5">
+        </div>
+    </div>
+    <div id="game-container">
+        <canvas id="gameCanvas" style="display:none;"></canvas>
+    </div>
+    <div id="joystick-container">
+        <div id="joystick-base">
+            <div id="joystick-stick"></div>
+        </div>
+    </div>
+    <script src="game.js"></script>
+</body>
+</html>

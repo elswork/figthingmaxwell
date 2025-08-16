@@ -1,0 +1,120 @@
+body {
+    font-family: sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
+    overflow: hidden; /* Prevent scrollbars */
+}
+
+h1 {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#game-container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+canvas {
+    border: 2px solid #333;
+    background-color: #fff;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+#fullscreen-btn {
+    margin-bottom: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+#fullscreen-btn:hover {
+    background-color: #0056b3;
+}
+
+#joystick-container {
+    position: fixed;
+    bottom: 80px;
+    left: 40px;
+    z-index: 1000;
+    display: none; /* Hidden by default, JS will show it on touch devices */
+}
+
+#joystick-base {
+    width: 120px;
+    height: 120px;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+#joystick-stick {
+    width: 60px;
+    height: 60px;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 50%;
+}
+
+
+#music-controls {
+    display: none; /* Initially hidden */
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 10px;
+    border-radius: 5px;
+    z-index: 1001;
+}
+
+#music-controls button {
+    margin-right: 5px;
+}
+
+#name-input-container {
+    text-align: center;
+}
+
+#name-input-container input {
+    padding: 10px;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+#name-input-container button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 1.5em;
+    }
+
+    #fullscreen-btn {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+}
